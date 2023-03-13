@@ -6,9 +6,8 @@ parameters:
     type: string
     displayName: "Branch Name"
     values:
-      - <branch1>
-      - <branch2>
-      - <branch3>
+      - main
+
   - name: BUILD_NAME
     displayName: "Build Name"
     type: string
