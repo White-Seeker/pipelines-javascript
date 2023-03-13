@@ -1,21 +1,94 @@
-# Node.js
-# Build a general Node.js project with npm.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+name: 'CCV2 Build Pipeline'
+trigger: none
 
-trigger:
-- main
+parameters:
+  - name: BRANCH
+    type: string
+    displayName: "Branch Name"
+    values:
+      - <branch1>
+      - <branch2>
+      - <branch3>
+  - name: BUILD_NAME
+    displayName: "Build Name"
+    type: string
+    values:
+      - <Build1>
+      - <Build2>
+      - <Build3>
+  - name: d1
+    type: boolean
+    default: false
+    displayName: "Check to deploy to D1"
+  - name: s1
+    type: boolean
+    default: false
+    displayName: "Check to deploy to S1"
+  - name: DB_UPDATE
+    type: string
+    values:
+      - UPDATE
+      - NONE
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: Build
+  displayName: "CCV2 Build"
+  jobs:
+  - job: Build
+    steps:
+    - bash: |
+        echo ""
+        echo "Install requests module"
+        pip install requests
+      displayName: "Installing Python modules"
+    - bash: |
+        echo ""
+        echo "Starting CCV2 build for Release ${{parameters.BUILD_NAME}} from ${{parameters.BRANCH}} branch"
+        git checkout CCV2_API
+        
+        echo ""
+        echo "Initiating build on CCV2....."
+        BUILD_CODE=$(python V2_build.py build ${{parameters.BRANCH}} ${{parameters.BUILD_NAME}}_`date +"M%m_D%d_%H%M"`)
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+        if [ $BUILD_CODE == "BUILD_FAILED" ] || [ $BUILD_CODE == "BUILD_API_ERROR" ] || [ $BUILD_CODE == "UNAUTHORIZED" ]; then
+          echo ""
+          echo "Build failed due to $BUILD_CODE. Please check with DevOps team."
+          echo ""
+          exit 2
+        else
+          echo "Build code is $BUILD_CODE"
+          echo "##vso[task.setvariable variable=CODE;isOutput=true]$BUILD_CODE"
+        fi
+      name: BUILD_CODE
+      displayName: "Build on CCV2"
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- stage: Deployment
+  dependsOn: Build
+  displayName: "CCV2 Deployment"
+  variables:
+    BUILD_CODE: $[ stageDependencies.Build.Build.outputs['BUILD_CODE.CODE'] ]
+  jobs:
+    - job: 'D1'
+      condition: eq(${{parameters.d1}}, 'true')
+      displayName: "D1 deployment"
+      steps:
+      - template: CCV2_Deploy_template.yml
+        parameters:
+            BUILD_CODE: $(BUILD_CODE)
+            ENV: d1
+            DB_UPDATE: ${{parameters.DB_UPDATE}}
+    - job: 'S1'
+      condition: eq(${{parameters.s1}}, 'true')
+      displayName: "S1 deployment"
+      steps:
+      - template: CCV2_Deploy_template.yml
+        parameters:
+            BUILD_CODE: $(BUILD_CODE)
+            ENV: s1
+            DB_UPDATE: ${{parameters.DB_UPDATE}}
+    - job: 'Release_Notes'
+      displayName: "Release notes"
+      steps:
+      - bash: |
+          echo ""
+          echo "Release notes for the build"
