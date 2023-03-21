@@ -6,6 +6,9 @@
 trigger:
 - main
 
+variables:
+- api_key = $(API_KEY)
+
 pool:
   vmImage: ubuntu-latest
 
