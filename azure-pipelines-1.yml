@@ -18,5 +18,5 @@ steps:
   displayName: 'Run a multi-line script'
   
 - bash: |
-    export api_token=$(API_TKN)
+    export api_token=$(API_TOKEN)
     python python.py
