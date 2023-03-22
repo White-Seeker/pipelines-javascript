@@ -1,20 +1,39 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger: none
 
 # variables:
 #   api: $(Ccv.API_TOKENN)
 #   sub: $(Ccv.SUB_CODEE)
 
-variables:
-- name: api
-  value: $(Ccv.API_TOKENN)
+# variables:
+# - name: api
+#   value: $(Ccv.API_TOKENN)
   
 pool:
   vmImage: ubuntu-latest
+
+variables:
+  - name: environment
+    value: Dev
+    # Define a list of options for the dropdown menu
+    values:
+      - Dev
+      - QA
+      - Prod
+
+parameters:
+  - name: d1
+    type: boolean
+    default: false
+    displayName: "Check to deploy to D1"
+  - name: s1
+    type: boolean
+    default: false
+    displayName: "Check to deploy to S1"
+  - name: DB_UPDATE
+    type: string
+    values:
+      - UPDATE
+      - NONE
 
 steps:
 - script: echo Hello, world!
@@ -22,12 +41,12 @@ steps:
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
   
 - bash: |
     # export api_token=$(API_TOKEN)
     # export sub_code=$(SUB_CODE)
-    export api_token=$(api)
-    export sub_code=$(sub)
+    # export api_token=$(api)
+    # export sub_code=$(sub)
     python python.py
+
