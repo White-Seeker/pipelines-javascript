@@ -6,8 +6,8 @@
 trigger: none
 
 variables:
-  api_token: $(ccv.API_TOKENN)
-  sub_code: $(ccv.SUB_CODEE)
+  api: $(ccv.API_TOKENN)
+  sub: $(ccv.SUB_CODEE)
 
 pool:
   vmImage: ubuntu-latest
@@ -24,6 +24,6 @@ steps:
 - bash: |
     # export api_token=$(API_TOKEN)
     # export sub_code=$(SUB_CODE)
-    export api_token=$(api_token)
-    export sub_code=$(sub_code)
+    export api_token=$(api)
+    export sub_code=$(sub)
     python python.py
