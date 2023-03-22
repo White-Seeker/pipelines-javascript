@@ -5,6 +5,10 @@
 
 trigger: none
 
+variables:
+  api_token: $(CCV2.API_TOKENN)
+  sub_code: $(CCV2.SUB_CODEE)
+
 pool:
   vmImage: ubuntu-latest
 
@@ -18,6 +22,8 @@ steps:
   displayName: 'Run a multi-line script'
   
 - bash: |
-    export api_token=$(API_TOKEN)
-    export sub_code=$(SUB_CODE)
+    # export api_token=$(API_TOKEN)
+    # export sub_code=$(SUB_CODE)
+    export api_token=$(api_token)
+    export sub_code=$(sub_code)
     python python.py
