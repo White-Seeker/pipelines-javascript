@@ -1,5 +1,5 @@
 import os
 
-api = os.environ.get('api_key')
+api_token = os.environ.get('api_token')
 
-print(api)
+print(api_token)
