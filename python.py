@@ -1,6 +1,5 @@
 import os
 
-api_key = os.environ.get('api_key')
-x=api_key
+api = os.environ.get('y')
 
-print(x)
+print(api)
