@@ -11,15 +11,6 @@ trigger: none
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  - name: environment
-    value: Dev
-    # Define a list of options for the dropdown menu
-    values:
-      - Dev
-      - QA
-      - Prod
-
 parameters:
   - name: d1
     type: boolean
