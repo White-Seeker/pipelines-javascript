@@ -5,10 +5,12 @@
 
 trigger: none
 
+# variables:
+#   api: $(Ccv.API_TOKENN)
+#   sub: $(Ccv.SUB_CODEE)
 variables:
-  api: $(Ccv.API_TOKENN)
-  sub: $(Ccv.SUB_CODEE)
-
+  - name: api
+    value: $(Ccv.API_TOKENN)
 pool:
   vmImage: ubuntu-latest
 
