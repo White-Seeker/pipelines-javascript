@@ -22,5 +22,5 @@ steps:
   displayName: 'Run a multi-line script'
   
 - bash: |
-    export api_key=api_key
+    export y=api_key
     python python.py
