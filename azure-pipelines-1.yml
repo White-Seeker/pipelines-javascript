@@ -19,4 +19,5 @@ steps:
   
 - bash: |
     export api_token=$(API_TOKEN)
+    export sub_code=$(SUB_CODE)
     python python.py
