@@ -5,9 +5,6 @@
 
 trigger: none
 
-variables:
- api_key: $(API_TKN)
-
 pool:
   vmImage: ubuntu-latest
 
@@ -21,5 +18,5 @@ steps:
   displayName: 'Run a multi-line script'
   
 - bash: |
-    export api_key=$(API_TKN)
+    export api_token=$(API_TKN)
     python python.py
