@@ -9,7 +9,7 @@ trigger: none
 #   value: $(Ccv.API_TOKENN)
 
 variables:
-  runName: $[variables['Build.BuildNumber']]
+  runName: $[variables['Build.BuildNumber'], variables['Environment.EnvironmentName'] ]
   
 pool:
   vmImage: ubuntu-latest
