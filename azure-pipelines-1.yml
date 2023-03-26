@@ -1,3 +1,5 @@
+name: "${{parameters.BRANCH}}"
+
 trigger: none
 
 # variables:
@@ -8,14 +10,19 @@ trigger: none
 # - name: api
 #   value: $(Ccv.API_TOKENN)
 
-variables:
-  # runName: $[variables['Build.BuildNumber'], variables['Environment.EnvironmentName']]
-    runName: $[format('{0}_{1}_{2}', variables['System.TeamProject'], variables['Build.SourceBranchName'], variables['Environment.EnvironmentName'])]
+# variables:
+#   # runName: $[variables['Build.BuildNumber'], variables['Environment.EnvironmentName']]
+#     runName: $[format('{0}_{1}_{2}', variables['System.TeamProject'], variables['Build.SourceBranchName'], variables['Environment.EnvironmentName'])]
 
 pool:
   vmImage: ubuntu-latest
 
 parameters:
+  - name: BRANCH
+    type: string
+    displayName: "Branch Name"
+    values:
+      - develop
   - name: d1
     type: boolean
     default: false
