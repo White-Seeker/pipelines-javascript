@@ -1,4 +1,7 @@
-name: "${{parameters.BRANCH}}"
+variables:
+  counter: $[counter(variables['counter'], 1)]
+  
+name: "$(variables.counter) - ${{parameters.BRANCH}}"
 
 trigger: none
 
