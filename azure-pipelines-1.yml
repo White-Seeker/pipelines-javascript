@@ -30,7 +30,6 @@ parameters:
     type: boolean
     default: false
     displayName: "Check to deploy to D1"
-    description: Deployment
   - name: s1
     type: boolean
     default: false
@@ -40,6 +39,7 @@ parameters:
     values:
       - UPDATE
       - NONE
+  description: deployment
 
 steps:
 - script: echo Hello, world!
