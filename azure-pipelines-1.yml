@@ -1,4 +1,4 @@
-name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}}, ${{parameters.STRATEGY}}"
+name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}}, eq(variables['d1'], true"
 
 trigger: none
 
@@ -16,7 +16,7 @@ pool:
 parameters:
   - name: BRANCH
     type: string
-    displayName: "|Branch Name|"
+    displayName: "Branch Name"
     values:
       - develop
   - name: d1
