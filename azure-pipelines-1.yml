@@ -1,4 +1,4 @@
-name: "$(BuildCounter) - ${{parameters.BRANCH}}"
+name: "$(BuildCounter) - ${{parameters.BRANCH}} $(JOBNAME)"
 
 trigger: none
 
