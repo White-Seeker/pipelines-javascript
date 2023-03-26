@@ -1,6 +1,3 @@
-# variables:
-#   counter: $[counter(variables['counter'], 1)]
-  
 name: "$(BuildCounter) - ${{parameters.BRANCH}} ${{Agent.JobName}}"
 
 trigger: none
