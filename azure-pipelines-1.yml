@@ -1,4 +1,4 @@
-name: "$(BuildCounter) - ${{parameters.BRANCH}} / ${{parameters.DB_UPDATE}} / ${{parameters.STRATEGY}}"
+name: "$(BuildCounter) - ${{parameters.BRANCH}} - ${{parameters.DB_UPDATE}} - ${{parameters.STRATEGY}}"
 
 trigger: none
 
