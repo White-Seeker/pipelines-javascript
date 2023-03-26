@@ -36,7 +36,7 @@ parameters:
 stages:
  - stage:
    jobs:
-    - job:
+    - job: JOB1
       steps:
       - script: echo Hello, world!
         displayName: 'Run a one-line script'
