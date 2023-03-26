@@ -1,4 +1,4 @@
-name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}}, eq(variables['d1'], true"
+name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}},   $(if eq(parameters.d1, true)"
 
 trigger: none
 
