@@ -44,6 +44,7 @@ stages:
       - script: |
           echo Add other tasks to build, test, and deploy your project.
         displayName: 'Run a multi-line script'
+
         
       - bash: |
           # export api_token=$(API_TOKEN)
@@ -52,3 +53,6 @@ stages:
           # export sub_code=$(sub)
           python python.py
           echo "##vso[task.setvariable variable=BuildCounter]$(BuildCounter)+1"
+          echo "======================================================================"
+          echo "                  CCV2 Build completed successfully                   "
+          echo "======================================================================"
