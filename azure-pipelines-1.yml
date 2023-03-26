@@ -23,7 +23,7 @@ pool:
 parameters:
   - name: BRANCH
     type: string
-    displayName: "Branch Name"
+    displayName: "|Branch Name|"
     values:
       - develop
   - name: d1
@@ -39,7 +39,6 @@ parameters:
     values:
       - UPDATE
       - NONE
-  description: deployment
 
 steps:
 - script: echo Hello, world!
