@@ -1,7 +1,7 @@
 variables:
   counter: $[counter(variables['counter'], 1)]
   
-name: "$(variables.counter)"
+name: "${{parameters.BRANCH}} $(variables.counter)"
 
 trigger: none
 
