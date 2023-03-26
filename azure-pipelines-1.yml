@@ -1,4 +1,4 @@
-name: "$(BuildCounter) - ${{parameters.BRANCH}} $(JOBNAME)"
+name: "$(BuildCounter) - ${{parameters.BRANCH}} / ${{parameters.DB_UPDATE}} / ${{parameters.STRATEGY}}"
 
 trigger: none
 
@@ -32,6 +32,13 @@ parameters:
     values:
       - UPDATE
       - NONE
+  - name: STRATEGY
+    displayName: "Deployment Mode"
+    type: string
+    default: 'RECREATE'
+    values:
+      - ROLLING_UPDATE
+      - RECREATE
 
 stages:
  - stage:
