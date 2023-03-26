@@ -33,18 +33,22 @@ parameters:
       - UPDATE
       - NONE
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+ - stage:
+   jobs:
+    - job:
+      steps:
+      - script: echo Hello, world!
+        displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-  displayName: 'Run a multi-line script'
-  
-- bash: |
-    # export api_token=$(API_TOKEN)
-    # export sub_code=$(SUB_CODE)
-    # export api_token=$(api)
-    # export sub_code=$(sub)
-    python python.py
-    echo "##vso[task.setvariable variable=BuildCounter]$(BuildCounter)+1"
+      - script: |
+          echo Add other tasks to build, test, and deploy your project.
+        displayName: 'Run a multi-line script'
+        
+      - bash: |
+          # export api_token=$(API_TOKEN)
+          # export sub_code=$(SUB_CODE)
+          # export api_token=$(api)
+          # export sub_code=$(sub)
+          python python.py
+          echo "##vso[task.setvariable variable=BuildCounter]$(BuildCounter)+1"
