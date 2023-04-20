@@ -1,6 +1,7 @@
 name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}}, $(if(eq('${{ parameters.d1 }}', 'true'), 'D1(Dev)', '')) "
 
-trigger: none
+pr:
+ - main
 
 # variables:
 #   api: $(Ccv.API_TOKENN)
