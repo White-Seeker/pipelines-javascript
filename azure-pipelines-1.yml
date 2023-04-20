@@ -1,45 +1,45 @@
 name: "$(BuildCounter) - ${{parameters.BRANCH}}, ${{parameters.DB_UPDATE}}, $(if(eq('${{ parameters.d1 }}', 'true'), 'D1(Dev)', '')) "
 
-pr:
- - main
+# pr:
+#  - main
 
 # variables:
 #   api: $(Ccv.API_TOKENN)
 #   sub: $(Ccv.SUB_CODEE)
 
-# variables:
-# - name: api
-#   value: $(Ccv.API_TOKENN)
+# # variables:
+# # - name: api
+# #   value: $(Ccv.API_TOKENN)
 
-pool:
-  vmImage: ubuntu-latest
+# pool:
+#   vmImage: ubuntu-latest
 
-parameters:
-  - name: BRANCH
-    type: string
-    displayName: "Branch Name"
-    values:
-      - develop
-  - name: d1
-    type: boolean
-    default: false
-    displayName: "Check to deploy to D1"
-  - name: s1
-    type: boolean
-    default: false
-    displayName: "Check to deploy to S1"
-  - name: DB_UPDATE
-    type: string
-    values:
-      - UPDATE
-      - NONE
-  - name: STRATEGY
-    displayName: "Deployment Mode"
-    type: string
-    default: 'RECREATE'
-    values:
-      - ROLLING_UPDATE
-      - RECREATE
+# parameters:
+#   - name: BRANCH
+#     type: string
+#     displayName: "Branch Name"
+#     values:
+#       - develop
+#   - name: d1
+#     type: boolean
+#     default: false
+#     displayName: "Check to deploy to D1"
+#   - name: s1
+#     type: boolean
+#     default: false
+#     displayName: "Check to deploy to S1"
+#   - name: DB_UPDATE
+#     type: string
+#     values:
+#       - UPDATE
+#       - NONE
+#   - name: STRATEGY
+#     displayName: "Deployment Mode"
+#     type: string
+#     default: 'RECREATE'
+#     values:
+#       - ROLLING_UPDATE
+#       - RECREATE
 
 stages:
  - stage:
