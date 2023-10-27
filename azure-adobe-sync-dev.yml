@@ -1,0 +1,36 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - feature/techtask
+      - develop
+  paths:
+     exclude:
+     - '**/*.yaml'
+     - '**/*.yml'
+     - '*.yml'
+     - '.gitignore'
+
+parameters:
+ - name: branch
+   type: string
+   default: feature/techtask
+
+variables:
+  - group: Variable-group-aem
+  - name: target_branch
+    # value: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
+    # value: develop
+    value: ${{parameters.branch}}
+       
+resources:
+- repo: self
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+stages:
+- stage: AEM_Cloud_Manager
+  displayName: 'Push_To_AEM_Cloudmanager'
+  jobs:
+  - template: repo-sync-template.yml
