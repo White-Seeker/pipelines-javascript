@@ -1,0 +1,26 @@
+trigger:
+  branches:
+    include:
+      - feature/*
+      - develop
+      - main
+  paths:
+     exclude:
+     - '**/*.yaml'
+     - '**/*.yml'
+     - '*.yml'
+     - '.gitignore'
+
+parameters:
+ - name: branch
+   type: string
+   default: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
+
+variables:
+  - group: Variable-group-aem
+ 
+pool:
+  vmImage: ubuntu-latest
+ 
+extends:
+  template: repo-sync-template.yml
