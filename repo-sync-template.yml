@@ -18,7 +18,7 @@ jobs:
       displayName: Shows All Branches    
  
     # - script: git remote add adobe https://$(aem_usr):$(aem_pwd)@github.com/White-Seeker/pipelines-javascript.git
-    - script: git remote add adobe https://White-Seeker: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@github.com/White-Seeker/pipelines-javascript.git
+    - script: git remote add adobe https://White-Seeker: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@github.com/White-Seeker/pipelines-javascript.git
       displayName: Add git remote to Adobe CloudManager
  
     - script: git checkout $(target_branch)
