@@ -1,0 +1,40 @@
+jobs:
+  - job: Push_To_Cloudmanager
+    timeoutInMinutes: 10
+    condition: succeeded()
+    workspace:
+     clean: all
+    steps:
+    - checkout: self
+      clean: true
+      persistCredentials: true
+ 
+    - script: |
+        git fetch --all --unshallow
+        git switch $(target_branch)
+      displayName: Fetches all Branch and Switching to $(target_branch)
+ 
+    - script: git branch -a
+      displayName: Shows All Branches    
+ 
+    # - script: git remote add adobe https://$(aem_usr):$(aem_pwd)@github.com/White-Seeker/pipelines-javascript.git
+    - script: git remote add adobe https://White-Seeker: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@github.com/White-Seeker/pipelines-javascript.git
+      displayName: Add git remote to Adobe CloudManager
+ 
+    - script: git checkout $(target_branch)
+      displayName: Checkout $(target_branch) branch
+ 
+    - script: git branch -a
+      displayName: All Branches
+ 
+    - script: |
+        git remote -v
+        git fetch --all --unshallow
+        git pull
+      displayName: Checking and pulling
+ 
+    - script: git branch -a
+      displayName: All Branches
+ 
+    - script: git push adobe $(target_branch)
+      displayName: Push changes from $(target_branch) branch to Adobe CloudManager
